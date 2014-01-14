@@ -1,0 +1,10 @@
+<h3>Reading Properties</h3>
+<s:property value="greeting" /> <s:property value="[1].greeting" /><br />
+<br />
+<s:property value="#application.code" /><br />
+<s:property value="#application['code']" /><br />
+<s:property value='#application["code"]' /><br />
+<s:property value="#parameters.id" /><br />
+<s:property value="[0].time" /><br />
+<s:property value="[0]['time']" /><br />
+<s:property value='[0]["time"]' />

@@ -1,0 +1,10 @@
+<h3>Working with Maps</h3>
+Cities: <s:property value="cities" /><br />
+City with index "CA": <s:property value='cities["CA"]' /><br />
+City with index 'WA': <s:property value="cities['WA']" /><br />
+Map size: <s:property value="cities.size" /><br />
+Map size: <s:property value="cities.size" /><br />
+isEmpty: <s:property value="cities.isEmpty" /><br />
+isEmpty: <s:property value="cities.isEmpty()" /><br />
+#application['code']: <s:property value="#application['code']" /><br />
+Host: <s:property value="#request.getHeader('host')" />

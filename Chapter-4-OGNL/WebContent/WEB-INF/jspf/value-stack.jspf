@@ -1,0 +1,60 @@
+<%
+   com.opensymphony.xwork2.util.ValueStack valueStack = (com.opensymphony.xwork2.util.ValueStack) request.getAttribute("struts.valueStack");
+%>
+<table>
+   <tr>
+      <th colspan="2">Value Stack Root</th>
+   </tr>
+   <tr>
+      <th>Object Type</th>
+      <th>Object Value</th>
+   </tr>
+   <%
+      java.util.ArrayList root = valueStack.getRoot();
+      int rSize = root.size();
+      for (Object element : valueStack.getRoot()) {
+         out.println("<tr>");
+            out.println("<td>" + element.getClass() + "</td>");
+            out.println("<td>" + element + "</td>");
+         out.println("</tr>");
+      }
+   %>
+</table>
+
+<table>
+   <tr>
+      <td>Implementation class</td>
+      <td><%=valueStack.getClass()%></td>
+   </tr>
+</table>
+
+<%
+   java.util.Map context = valueStack.getContext();
+   out.println("Context type:" + context.getClass());
+%>
+<table>
+   <tr>
+      <th colspan="2">ValueStack Context</th>
+   </tr>
+   <tr>
+      <th>Key</th>
+      <th>Value</th>
+   </tr>
+   <%
+      for (Object key : context.keySet()) {
+         out.println("<tr>");
+         try {
+            out.println("<td>" + key + "</td>");
+            out.println("<td>" + context.get(key) + "</td>");
+         }
+         catch(NullPointerException nullPointer) {
+            out.println("<td><-- threw NullPointerException</td>");
+         }
+         out.println("</tr>");
+      }
+   %>
+</table>
+
+<br />
+Text: <s:property value="text" /><br />
+Text: <s:property value="[0].text" />

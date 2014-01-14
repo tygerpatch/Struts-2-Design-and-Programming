@@ -1,0 +1,14 @@
+<h3>Working with arrays and Lists</h3>
+<br />
+<s:property value="colors" /><br />
+First color: <s:property value="colors[0]" /><br />
+Second color: <s:property value="colors[1]" /><br />
+Array length:<s:property value="colors.length" /><br />
+<s:property value="countries" /><br />
+First country: <s:property value="countries[0]" /><br />
+Second country: <s:property value="countries[1]" /><br />
+List size: <s:property value="countries.size" /><br />
+List size: <s:property value="countries.size()" /><br />
+isEmpty: <s:property value="countries.isEmpty" /><br />
+isEmpty: <s:property value="countries.isEmpty()" /><br />
+Create a string and display the first element: <s:property value='{"Alaska", "California", "Washington"}[0]' />

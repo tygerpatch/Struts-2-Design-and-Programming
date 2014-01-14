@@ -1,0 +1,7 @@
+<h3>Invoking Fields and Methods</h3>
+Static field: <s:property value="@java.util.Calendar@DECEMBER" /><br />
+Field: <s:property value="[0].datePattern" /><br />
+Static method: <s:property value="@app04a.Util@now()" /><br />
+[0].now(): <s:property value="[0].now()" /><br />
+@vs@now(): <s:property value="@vs@now()" /><br />
+2-argument method: ([0].repeat(3, 'Hello')) <s:property value='[0].repeat(3, "Hello")' />

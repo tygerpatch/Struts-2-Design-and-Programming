@@ -1,0 +1,2 @@
+<h3>Setting Property Values</h3>
+Greeting: <s:property value="greeting" />
