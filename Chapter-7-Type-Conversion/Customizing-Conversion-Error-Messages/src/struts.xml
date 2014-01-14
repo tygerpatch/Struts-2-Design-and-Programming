@@ -5,17 +5,18 @@
 
 <struts>
 
-    <constant name="struts.enable.DynamicMethodInvocation" value="false" />
-    <constant name="struts.devMode" value="true" />
+	<constant name="struts.enable.DynamicMethodInvocation" value="false" />
+	<constant name="struts.devMode" value="true" />
 
-    <package name="app07a" extends="struts-default">
-        <action name="Transaction1">
-            <result>/jsp/Transaction.jsp</result>
-        </action>
-        <action name="Transaction2" class="app07a.Transaction">
-            <result name="input">/jsp/Transaction.jsp</result>
-            <result name="success">/jsp/Receipt.jsp</result>
-        </action>
-    </package>
+	<package name="stuff" extends="struts-default">
+		<action name="Transaction1">
+			<result>/jsp/Transaction.jsp</result>
+		</action>
+
+		<action name="Transaction2" class="stuff.Transaction">
+			<result name="input">/jsp/Transaction.jsp</result>
+			<result name="success">/jsp/Receipt.jsp</result>
+		</action>
+	</package>
 
 </struts>
