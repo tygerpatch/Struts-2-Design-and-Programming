@@ -1,0 +1,54 @@
+<html>
+   <body>
+      <h3>Using Aware Interfaces to Access Resources</h3>
+      <!-- The following displays Login.jsp page.
+      When the User clicks submit, the User class' login method is executed.
+
+      If the User enters a userName and password that's at least one character in length,
+      then the execute method returns "success" and the user is forwarded to Menu.jsp.
+      Otherwise, the execute method returns "input" and the user is shown the Login page again.
+
+      Menu.jsp page has a logout link which invokes the User's logout method.
+      -->
+      <a href = "./User_input.action">Click Me</a>
+      <hr />
+
+      <h3>HttpHeader</h3>
+      <!-- The following demonstrates how to specify a default action. -->
+      <a href = "./FooBar.action">Click Me</a>
+      <hr />
+
+      <h3>Redirect Action</h3>
+      <!-- The following demonstrates how to redirection to a different action.
+      Even though TestUser is specified as the class for the action, it's execute method isn't called.
+      Instead, the User is redirected to the User_input action.
+       -->
+      <a href = "./RedirectTest.action">Click Me</a>
+      <hr />
+
+      <h3>Exception Handling with Exception Mapping</h3>
+      <a href = "./ExceptionTest.action">Click Me</a>
+      <hr />
+
+      <h3>Wildcard Mapping</h3>
+      <ul>
+         <li><a href = "./tame/Book_add.action">Add Book</a></li>
+         <li><a href = "./tame/Book_edit.action">Edit Book</a></li>
+         <li><a href = "./tame/Book_edit.action">Delete Book</a></li>
+      </ul>
+
+      <ul>
+         <li><a href = "./wild/Author_add.action">Add Author</a></li>
+         <li><a href = "./wild/Author_edit.action">Edit Author</a></li>
+         <li><a href = "./wild/Author_delete.action">Delete Author</a></li>
+      </ul>
+      <hr />
+
+      <h3>Dynamic Method Invocation</h3>
+      <ul>
+         <li><a href = "./dmi/Book.action">Call Book's execute method</a></li>
+         <li><a href = "./dmi/Book!edit.action">Call Book's edit method</a></li>
+      </ul>
+      <hr />
+   </body>
+</html>
