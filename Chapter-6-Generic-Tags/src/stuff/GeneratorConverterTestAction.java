@@ -1,4 +1,4 @@
-package app06a;
+package stuff;
 
 import org.apache.struts2.util.IteratorGenerator;
 import com.opensymphony.xwork2.ActionSupport;

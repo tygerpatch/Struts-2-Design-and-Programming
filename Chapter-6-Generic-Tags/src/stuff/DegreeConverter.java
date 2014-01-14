@@ -1,4 +1,4 @@
-package app06a;
+package stuff;
 
 public class DegreeConverter {
     private float celcius;

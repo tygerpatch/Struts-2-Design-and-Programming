@@ -8,12 +8,12 @@
 	<constant name="struts.enable.DynamicMethodInvocation" value="false" />
 	<constant name="struts.devMode" value="true" />
 
-	<package name="app06a" extends="struts-default">
-		<action name="Bean" class="app06a.BeanTestAction">
+	<package name="stuff" extends="struts-default">
+		<action name="Bean" class="stuff.BeanTestAction">
 			<result>/jsp/Bean.jsp</result>
 		</action>
 
-		<action name="Date" class="app06a.DateTestAction">
+		<action name="Date" class="stuff.DateTestAction">
 			<result>/jsp/Date.jsp</result>
 		</action>
 
@@ -21,39 +21,39 @@
 			<result>/jsp/Generator.jsp</result>
 		</action>
 
-		<action name="GeneratorConverter" class="app06a.GeneratorConverterTestAction">
+		<action name="GeneratorConverter" class="stuff.GeneratorConverterTestAction">
 			<result>/jsp/GeneratorConverter.jsp</result>
 		</action>
 
-		<action name="If" class="app06a.IfTestAction">
+		<action name="If" class="stuff.IfTestAction">
 			<result>/jsp/If.jsp</result>
 		</action>
 
-		<action name="Iterator" class="app06a.IteratorTestAction">
+		<action name="Iterator" class="stuff.IteratorTestAction">
 		    <result>/jsp/Iterator.jsp</result>
 		</action>
 
-		<action name="Merge" class="app06a.MergeTestAction">
+		<action name="Merge" class="stuff.MergeTestAction">
 		    <result>/jsp/Merge.jsp</result>
 		</action>
 
-		<action name="Property" class="app06a.PropertyTestAction">
+		<action name="Property" class="stuff.PropertyTestAction">
 		    <result>/jsp/Property.jsp</result>
 		</action>
 
-		<action name="Push" class="app06a.PushTestAction">
+		<action name="Push" class="stuff.PushTestAction">
 		    <result>/jsp/Push.jsp</result>
 		</action>
 
-		<action name="Set" class="app06a.SetTestAction">
+		<action name="Set" class="stuff.SetTestAction">
 		    <result>/jsp/Set.jsp</result>
 		</action>
 
-		<action name="Sort" class="app06a.SortTestAction">
+		<action name="Sort" class="stuff.SortTestAction">
 		    <result>/jsp/Sort.jsp</result>
 		</action>
 
-		<action name="Subset" class="app06a.SubsetTestAction">
+		<action name="Subset" class="stuff.SubsetTestAction">
 		    <result>/jsp/Subset.jsp</result>
 		</action>
     </package>

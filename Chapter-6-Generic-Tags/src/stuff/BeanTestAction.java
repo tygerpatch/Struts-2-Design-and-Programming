@@ -1,4 +1,4 @@
-package app06a;
+package stuff;
 
 import com.opensymphony.xwork2.ActionSupport;
 

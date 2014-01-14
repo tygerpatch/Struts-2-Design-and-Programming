@@ -1,4 +1,4 @@
-package app06a;
+package stuff;
 
 import java.util.Map;
 
