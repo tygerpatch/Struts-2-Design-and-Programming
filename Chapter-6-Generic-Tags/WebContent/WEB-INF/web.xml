@@ -29,4 +29,9 @@
     <login-config>
         <auth-method>BASIC</auth-method>
     </login-config>
-</web-app> 
+
+      <welcome-file-list>
+      <welcome-file>index.html</welcome-file>
+   </welcome-file-list>
+
+</web-app>
