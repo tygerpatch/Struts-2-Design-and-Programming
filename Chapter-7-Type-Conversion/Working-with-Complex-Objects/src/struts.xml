@@ -8,14 +8,16 @@
     <constant name="struts.enable.DynamicMethodInvocation" value="false" />
     <constant name="struts.devMode" value="true" />
 
-    <package name="app07d" extends="struts-default">
+    <package name="stuff" extends="struts-default">
+
         <action name="Admin1">
             <result>/jsp/Admin.jsp</result>
         </action>
-        <action name="Admin2" class="app07d.Admin">
+
+        <action name="Admin2" class="stuff.Admin">
             <result name="input">/jsp/Admin.jsp</result>
             <result name="success">/jsp/Confirmation.jsp</result>
         </action>
-    </package>
 
+    </package>
 </struts>
