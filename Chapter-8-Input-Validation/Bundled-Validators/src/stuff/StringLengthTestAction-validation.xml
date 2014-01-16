@@ -1,0 +1,13 @@
+<!DOCTYPE validators PUBLIC
+   "-//Apache Struts//XWork Validator 1.0.3//EN"
+   "http://struts.apache.org/dtds/xwork-validator-1.0.3.dtd">
+
+<validators>
+	<field name="userName">
+		<field-validator type="stringlength">
+			<param name="minLength">6</param>
+			<param name="maxLength">14</param>
+			<message>User name must be between 6 and 14 characters long</message>
+		</field-validator>
+	</field>
+</validators>

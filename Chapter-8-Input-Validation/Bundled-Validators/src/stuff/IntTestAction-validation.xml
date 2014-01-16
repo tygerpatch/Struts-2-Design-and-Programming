@@ -1,0 +1,14 @@
+<!DOCTYPE validators PUBLIC
+   "-//Apache Struts//XWork Validator 1.0.3//EN"
+   "http://struts.apache.org/dtds/xwork-validator-1.0.3.dtd">
+
+<validators>
+	<field name="year">
+		<field-validator type="int">
+
+			<param name="min">1990</param>
+			<param name="max">2009</param>
+			<message>Year must be between ${min} and ${max}</message>
+		</field-validator>
+	</field>
+</validators>

@@ -1,0 +1,12 @@
+<!DOCTYPE validators PUBLIC
+   "-//Apache Struts//XWork Validator 1.0.3//EN"
+   "http://struts.apache.org/dtds/xwork-validator-1.0.3.dtd">
+
+<validators>
+	<field name="birthDate">
+		<field-validator type="date">
+			<param name="max">1/1/2000</param>
+			<message>You must have been born before the year 2000 to register</message>
+		</field-validator>
+	</field>
+</validators>
