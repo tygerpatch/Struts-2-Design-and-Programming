@@ -1,48 +1,44 @@
 package app11a.dao;
 
-import java.sql.SQLException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
+
 import app11a.Employee;
 import app11a.EmployeeSearchCriteria;
-import app11a.dao.DAOException;
-import app11a.dao.DBUtil;
 
 public class EmployeeDAOMySQLImpl extends DAOBase implements EmployeeDAO {
    private static final String CREATE_EMPLOYEE_SQL = "INSERT INTO employees (firstName,lastName) VALUES (?, ?)";
 
-   public void createEmployee(Employee customer) throws DAOException {
+   public void createEmployee(Employee employee) throws SQLException {
       Connection connection = null;
-      PreparedStatement pStatement = null;
+      PreparedStatement preparedStatement = null;
+      // Recall that PreparedStatement(s) can have parameters, Statement(s) do not
       try {
          connection = getConnection();
-         // Prepare a statement to insert a record
-         pStatement = connection.prepareStatement(CREATE_EMPLOYEE_SQL);
-         pStatement.setString(1, customer.getFirstName());
-         pStatement.setString(2, customer.getLastName());
-         pStatement.executeUpdate();
-         pStatement.close();
-      }
-      catch (SQLException ex) {
-         throw new DAOException();
+
+         preparedStatement = connection.prepareStatement(CREATE_EMPLOYEE_SQL);
+         preparedStatement.setString(1, employee.getFirstName());
+         preparedStatement.setString(2, employee.getLastName());
+         preparedStatement.executeUpdate();
+         preparedStatement.close();
+         // Even though closing the Connection object will also close any of its
+         // Statement objects,
+         // it's considered good programming practice to explicitly close the
+         // Statement.
       }
       finally {
-         try {
-            connection.close();
-         }
-         catch (SQLException ex) {
-            throw new DAOException();
-         }
+         connection.close();
       }
    }
 
    private static final String UPDATE_EMPLOYEE_SQL = "UPDATE employees SET firstName=?, lastName=? WHERE id = ?";
 
-   public void updateEmployee(Employee employee) throws DAOException {
+   public void updateEmployee(Employee employee) throws SQLException {
       Connection connection = null;
       PreparedStatement pStatement = null;
       try {
@@ -54,21 +50,14 @@ public class EmployeeDAOMySQLImpl extends DAOBase implements EmployeeDAO {
          pStatement.executeUpdate();
          pStatement.close();
       }
-      catch (SQLException e) {
-         throw new DAOException();
-      }
       finally {
-         try {
-            connection.close();
-         }
-         catch (SQLException ex) {
-         }
+         connection.close();
       }
    }
 
    private static final String GET_EMPLOYEE_SQL = "SELECT firstName, lastName FROM employees WHERE id = ?";
 
-   public Employee getEmployee(int employeeId) throws DAOException {
+   public Employee getEmployee(int employeeId) throws SQLException {
       Connection connection = null;
       PreparedStatement pStatement = null;
       ResultSet rs = null;
@@ -86,22 +75,15 @@ public class EmployeeDAOMySQLImpl extends DAOBase implements EmployeeDAO {
          rs.close();
          pStatement.close();
       }
-      catch (SQLException ex) {
-         throw new DAOException();
-      }
       finally {
-         try {
-            connection.close();
-         }
-         catch (SQLException ex) {
-         }
+         connection.close();
       }
       return employee;
    }
 
    private static final String DELETE_EMPLOYEE_SQL = "DELETE FROM employees WHERE id = ?";
 
-   public void deleteEmployee(int employeeId) throws DAOException {
+   public void deleteEmployee(int employeeId) throws SQLException {
       Connection connection = null;
       PreparedStatement pStatement = null;
       try {
@@ -111,21 +93,14 @@ public class EmployeeDAOMySQLImpl extends DAOBase implements EmployeeDAO {
          pStatement.executeUpdate();
          pStatement.close();
       }
-      catch (SQLException e) {
-         throw new DAOException();
-      }
       finally {
-         try {
-            connection.close();
-         }
-         catch (SQLException ex) {
-         }
+         connection.close();
       }
    }
 
    private static final String SEARCH_EMPLOYEES_SQL = "SELECT id, firstName, lastName FROM employees WHERE ";
 
-   public List<Employee> searchEmployees(EmployeeSearchCriteria searchCriteria) throws DAOException {
+   public List<Employee> searchEmployees(EmployeeSearchCriteria searchCriteria) throws SQLException {
       List<Employee> employees = new ArrayList<Employee>();
       Connection connection = null;
       Statement statement = null;
@@ -160,15 +135,8 @@ public class EmployeeDAOMySQLImpl extends DAOBase implements EmployeeDAO {
          resultSet.close();
          statement.close();
       }
-      catch (SQLException e) {
-         throw new DAOException();
-      }
       finally {
-         try {
-            connection.close();
-         }
-         catch (SQLException ex) {
-         }
+         connection.close();
       }
       return employees;
    }

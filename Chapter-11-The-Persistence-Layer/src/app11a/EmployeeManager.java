@@ -1,11 +1,7 @@
 package app11a;
+import java.sql.SQLException;
 import java.util.List;
 
-import javax.servlet.ServletContext;
-
-import org.apache.struts2.ServletActionContext;
-
-import app11a.dao.DAOException;
 import app11a.dao.DAOFactory;
 import app11a.dao.EmployeeDAO;
 
@@ -20,7 +16,7 @@ public class EmployeeManager {
       try {
          employeeDAO.createEmployee(employee);
       }
-      catch (DAOException e) {
+      catch (SQLException e) {
       }
    }
 
@@ -29,7 +25,7 @@ public class EmployeeManager {
       try {
          employeeDAO.deleteEmployee(employeeId);
       }
-      catch (DAOException e) {
+      catch (SQLException e) {
       }
    }
 
@@ -38,7 +34,7 @@ public class EmployeeManager {
       try {
          return employeeDAO.getEmployee(employeeId);
       }
-      catch (DAOException e) {
+      catch (SQLException e) {
       }
       return null;
    }
@@ -48,7 +44,7 @@ public class EmployeeManager {
       try {
          employeeDAO.updateEmployee(employee);
       }
-      catch (DAOException e) {
+      catch (SQLException e) {
       }
    }
 
@@ -57,7 +53,7 @@ public class EmployeeManager {
       try {
          return employeeDAO.searchEmployees(criteria);
       }
-      catch (DAOException e) {
+      catch (SQLException e) {
       }
       return null;
    }
