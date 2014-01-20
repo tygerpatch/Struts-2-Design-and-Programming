@@ -135,14 +135,10 @@ public class EmployeeDAOMySQLImpl extends DAOBase implements EmployeeDAO {
       StringBuilder criteriaSql = new StringBuilder(512);
       criteriaSql.append(SEARCH_EMPLOYEES_SQL);
       if (searchCriteria.getFirstName() != null) {
-         criteriaSql.append("firstName LIKE '%"
-               + DBUtil.fixSqlFieldValue(searchCriteria.getFirstName())
-               + "%' AND ");
+         criteriaSql.append("firstName LIKE '%" + DBUtil.fixSqlFieldValue(searchCriteria.getFirstName()) + "%' AND ");
       }
       if (searchCriteria.getLastName() != null) {
-         criteriaSql.append("lastName LIKE '%"
-               + DBUtil.fixSqlFieldValue(searchCriteria.getLastName())
-               + "%' AND ");
+         criteriaSql.append("lastName LIKE '%" + DBUtil.fixSqlFieldValue(searchCriteria.getLastName()) + "%' AND ");
       }
       // Remove unused 'And' & 'WHERE'
       if (criteriaSql.substring(criteriaSql.length() - 5).equals(" AND "))
