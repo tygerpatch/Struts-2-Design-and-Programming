@@ -1,7 +1,5 @@
 package app11a;
 
-import java.util.Date;
-
 public class Employee {
 
    public Employee() {

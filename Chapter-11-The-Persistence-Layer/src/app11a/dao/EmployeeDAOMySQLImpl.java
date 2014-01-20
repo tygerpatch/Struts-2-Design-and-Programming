@@ -9,7 +9,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import app11a.Employee;
-import app11a.EmployeeSearchCriteria;
 
 public class EmployeeDAOMySQLImpl extends DAOBase implements EmployeeDAO {
    private static final String CREATE_EMPLOYEE_SQL = "INSERT INTO employees (firstName,lastName) VALUES (?, ?)";
@@ -26,10 +25,8 @@ public class EmployeeDAOMySQLImpl extends DAOBase implements EmployeeDAO {
          preparedStatement.setString(2, employee.getLastName());
          preparedStatement.executeUpdate();
          preparedStatement.close();
-         // Even though closing the Connection object will also close any of its
-         // Statement objects,
-         // it's considered good programming practice to explicitly close the
-         // Statement.
+         // Even though closing the Connection object will also close any of its Statement objects,
+         // it's considered good programming practice to explicitly close the Statement.
       }
       finally {
          connection.close();
@@ -40,15 +37,15 @@ public class EmployeeDAOMySQLImpl extends DAOBase implements EmployeeDAO {
 
    public void updateEmployee(Employee employee) throws SQLException {
       Connection connection = null;
-      PreparedStatement pStatement = null;
+      PreparedStatement preparedStatement = null;
       try {
          connection = getConnection();
-         pStatement = connection.prepareStatement(UPDATE_EMPLOYEE_SQL);
-         pStatement.setString(1, employee.getFirstName());
-         pStatement.setString(2, employee.getLastName());
-         pStatement.setInt(3, employee.getId());
-         pStatement.executeUpdate();
-         pStatement.close();
+         preparedStatement = connection.prepareStatement(UPDATE_EMPLOYEE_SQL);
+         preparedStatement.setString(1, employee.getFirstName());
+         preparedStatement.setString(2, employee.getLastName());
+         preparedStatement.setInt(3, employee.getId());
+         preparedStatement.executeUpdate();
+         preparedStatement.close();
       }
       finally {
          connection.close();
@@ -59,21 +56,22 @@ public class EmployeeDAOMySQLImpl extends DAOBase implements EmployeeDAO {
 
    public Employee getEmployee(int employeeId) throws SQLException {
       Connection connection = null;
-      PreparedStatement pStatement = null;
-      ResultSet rs = null;
+      PreparedStatement preparedStatement = null;
+      ResultSet resultSet = null;
       Employee employee = new Employee();
       try {
          connection = getConnection();
-         pStatement = connection.prepareStatement(GET_EMPLOYEE_SQL);
-         pStatement.setInt(1, employeeId);
-         rs = pStatement.executeQuery();
-         if (rs.next()) {
-            employee.setFirstName(rs.getString("firstName"));
-            employee.setLastName(rs.getString("lastName"));
+         preparedStatement = connection.prepareStatement(GET_EMPLOYEE_SQL);
+         preparedStatement.setInt(1, employeeId);
+         resultSet = preparedStatement.executeQuery();
+         if (resultSet.next()) {
+            employee.setFirstName(resultSet.getString("firstName"));
+            employee.setLastName(resultSet.getString("lastName"));
             employee.setId(employeeId);
          }
-         rs.close();
-         pStatement.close();
+         resultSet.close();
+         // Although closing a Statement also closes its ResultSet(s), it's still good to explicitly close the ResultSet.
+         preparedStatement.close();
       }
       finally {
          connection.close();
@@ -85,46 +83,31 @@ public class EmployeeDAOMySQLImpl extends DAOBase implements EmployeeDAO {
 
    public void deleteEmployee(int employeeId) throws SQLException {
       Connection connection = null;
-      PreparedStatement pStatement = null;
+      PreparedStatement preparedStatement = null;
       try {
          connection = getConnection();
-         pStatement = connection.prepareStatement(DELETE_EMPLOYEE_SQL);
-         pStatement.setInt(1, employeeId);
-         pStatement.executeUpdate();
-         pStatement.close();
+         preparedStatement = connection.prepareStatement(DELETE_EMPLOYEE_SQL);
+         preparedStatement.setInt(1, employeeId);
+         preparedStatement.executeUpdate();
+         preparedStatement.close();
       }
       finally {
          connection.close();
       }
    }
 
-   private static final String SEARCH_EMPLOYEES_SQL = "SELECT id, firstName, lastName FROM employees WHERE ";
+   private static final String SEARCH_EMPLOYEES_SQL = "SELECT id, firstName, lastName FROM employees";
 
-   public List<Employee> searchEmployees(EmployeeSearchCriteria searchCriteria) throws SQLException {
+   public List<Employee> getEmployees() throws SQLException {
       List<Employee> employees = new ArrayList<Employee>();
       Connection connection = null;
       Statement statement = null;
       ResultSet resultSet = null;
 
-      // Build the search criterias
-      StringBuilder criteriaSql = new StringBuilder(512);
-      criteriaSql.append(SEARCH_EMPLOYEES_SQL);
-      if (searchCriteria.getFirstName() != null) {
-         criteriaSql.append("firstName LIKE '%" + DBUtil.fixSqlFieldValue(searchCriteria.getFirstName()) + "%' AND ");
-      }
-      if (searchCriteria.getLastName() != null) {
-         criteriaSql.append("lastName LIKE '%" + DBUtil.fixSqlFieldValue(searchCriteria.getLastName()) + "%' AND ");
-      }
-      // Remove unused 'And' & 'WHERE'
-      if (criteriaSql.substring(criteriaSql.length() - 5).equals(" AND "))
-         criteriaSql.delete(criteriaSql.length() - 5, criteriaSql.length() - 1);
-      if (criteriaSql.substring(criteriaSql.length() - 7).equals(" WHERE "))
-         criteriaSql.delete(criteriaSql.length() - 7, criteriaSql.length() - 1);
-
       try {
          connection = getConnection();
          statement = connection.createStatement();
-         resultSet = statement.executeQuery(criteriaSql.toString());
+         resultSet = statement.executeQuery(SEARCH_EMPLOYEES_SQL);
          while (resultSet.next()) {
             Employee employee = new Employee();
             employee.setId(resultSet.getInt("id"));

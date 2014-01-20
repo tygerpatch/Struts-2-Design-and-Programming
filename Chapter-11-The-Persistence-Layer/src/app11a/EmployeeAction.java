@@ -1,11 +1,59 @@
 package app11a;
 
+import app11a.dao.DAOFactory;
+import app11a.dao.EmployeeDAO;
+
 import com.opensymphony.xwork2.ActionSupport;
 import com.opensymphony.xwork2.ModelDriven;
 import com.opensymphony.xwork2.Preparable;
+
+import java.sql.SQLException;
 import java.util.List;
 
 public class EmployeeAction extends ActionSupport implements Preparable, ModelDriven {
+
+   public String list() throws SQLException {
+      return SUCCESS;
+   }
+
+   public String create() throws SQLException {
+      EmployeeDAO employeeDAO = DAOFactory.getEmployeeDAO();
+      employeeDAO.createEmployee(employee);
+      return SUCCESS;
+   }
+
+   public String edit() {
+      return SUCCESS;
+   }
+
+   public String update() throws SQLException {
+      EmployeeDAO employeeDAO = DAOFactory.getEmployeeDAO();
+      employeeDAO.updateEmployee(employee);
+      return SUCCESS;
+   }
+
+   public String delete() throws SQLException {
+      EmployeeDAO employeeDAO = DAOFactory.getEmployeeDAO();
+      employeeDAO.deleteEmployee(employeeId);
+      return SUCCESS;
+   }
+
+   // *** (read-only) employees property
+
+   public List<Employee> getEmployees() throws SQLException {
+      return DAOFactory.getEmployeeDAO().getEmployees();
+   }
+
+   // *** employeeId property
+   private int employeeId;
+
+   public int getEmployeeId() {
+      return employeeId;
+   }
+
+   public void setEmployeeId(int employeeId) {
+      this.employeeId = employeeId;
+   }
 
    // *** Preparable interface
    public void prepare() throws Exception {
@@ -13,7 +61,8 @@ public class EmployeeAction extends ActionSupport implements Preparable, ModelDr
          employee = new Employee();
       }
       else {
-         employee = EmployeeManager.find(employeeId);
+         EmployeeDAO employeeDAO = DAOFactory.getEmployeeDAO();
+         employee =  employeeDAO.getEmployee(employeeId);
       }
    }
 
@@ -24,12 +73,6 @@ public class EmployeeAction extends ActionSupport implements Preparable, ModelDr
 
    // *** employee property
    private Employee employee;
-   private int employeeId;
-   private List<Employee> employees;
-
-   public List<Employee> getEmployees() {
-      return employees;
-   }
 
    public Employee getEmployee() {
       return employee;
@@ -39,41 +82,4 @@ public class EmployeeAction extends ActionSupport implements Preparable, ModelDr
       this.employee = employee;
    }
 
-   public void setEmployees(List<Employee> employees) {
-      this.employees = employees;
-   }
-
-   public String list() {
-      employees = EmployeeManager.getEmployees();
-      return SUCCESS;
-   }
-
-   public String create() {
-      EmployeeManager.create(employee);
-      return SUCCESS;
-   }
-
-   public String edit() {
-      return SUCCESS;
-   }
-
-   public String update() {
-      EmployeeManager.update(employee);
-      employees = EmployeeManager.getEmployees();
-      return SUCCESS;
-   }
-
-   public String delete() {
-      EmployeeManager.delete(employeeId);
-      employees = EmployeeManager.getEmployees();
-      return SUCCESS;
-   }
-
-   public int getEmployeeId() {
-      return employeeId;
-   }
-
-   public void setEmployeeId(int employeeId) {
-      this.employeeId = employeeId;
-   }
 }
