@@ -125,9 +125,7 @@ public class EmployeeDAOMySQLImpl extends DAOBase implements EmployeeDAO {
 
    private static final String SEARCH_EMPLOYEES_SQL = "SELECT id, firstName, lastName FROM employees WHERE ";
 
-   public List<Employee> searchEmployees(EmployeeSearchCriteria searchCriteria)
-         throws DAOException {
-
+   public List<Employee> searchEmployees(EmployeeSearchCriteria searchCriteria) throws DAOException {
       List<Employee> employees = new ArrayList<Employee>();
       Connection connection = null;
       Statement statement = null;

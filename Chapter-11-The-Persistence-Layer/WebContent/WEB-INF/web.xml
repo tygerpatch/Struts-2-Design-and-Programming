@@ -5,9 +5,9 @@
    xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd"
    version="2.5"> 
 
-    <context-param>
+   <context-param>
         <param-name>dataSourceJndiName</param-name>
-        <param-value>java:/comp/env/jdbc/myDataSource</param-value>
+        <param-value>jdbc/MySQLDataSource</param-value>
     </context-param>
 
     <context-param>

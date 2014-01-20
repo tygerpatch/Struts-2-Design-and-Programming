@@ -14,7 +14,8 @@ public class DAOBase implements DAO {
       if (dataSource != null) {
          try {
             connection = dataSource.getConnection();
-            // TODO: connection.setCatalog("my_jdbc"); // added, Todd G
+            // TODO: make database name a context-param in web.xml
+            connection.setCatalog("my_jdbc");
          }
          catch (SQLException e) {
             System.out.println("DAOBase");
