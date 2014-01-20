@@ -4,25 +4,10 @@ import javax.servlet.ServletContext;
 import org.apache.struts2.ServletActionContext;
 
 public class DAOFactory {
-   private String databaseType;
-   private static DAOFactory instance;
-
-   static {
-      instance = new DAOFactory();
-   }
-
-   private DAOFactory() {
+   public static EmployeeDAO getEmployeeDAO() {
       ServletContext servletContext = ServletActionContext.getServletContext();
-      databaseType = servletContext.getInitParameter("dbType");
-   }
+      String databaseType = servletContext.getInitParameter("dbType");
 
-   public static DAOFactory getInstance() {
-      return instance;
-   }
-
-   public EmployeeDAO getEmployeeDAO() {
-      System.out.println("*** DAOFactory's getEmployeeDAO ***");
-      System.out.println("databaseType = " + databaseType);
       if ("mysql".equalsIgnoreCase(databaseType)) {
          return new EmployeeDAOMySQLImpl();
       }

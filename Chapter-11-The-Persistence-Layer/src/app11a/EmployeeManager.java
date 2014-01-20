@@ -1,6 +1,10 @@
 package app11a;
 import java.util.List;
-import app11a.Employee;
+
+import javax.servlet.ServletContext;
+
+import org.apache.struts2.ServletActionContext;
+
 import app11a.dao.DAOException;
 import app11a.dao.DAOFactory;
 import app11a.dao.EmployeeDAO;
@@ -12,7 +16,7 @@ public class EmployeeManager {
    }
 
    public static void create(Employee employee) {
-      EmployeeDAO employeeDAO = DAOFactory.getInstance().getEmployeeDAO();
+      EmployeeDAO employeeDAO = DAOFactory.getEmployeeDAO();
       try {
          employeeDAO.createEmployee(employee);
       }
@@ -21,7 +25,7 @@ public class EmployeeManager {
    }
 
    public static void delete(int employeeId) {
-      EmployeeDAO employeeDAO = DAOFactory.getInstance().getEmployeeDAO();
+      EmployeeDAO employeeDAO = DAOFactory.getEmployeeDAO();
       try {
          employeeDAO.deleteEmployee(employeeId);
       }
@@ -30,7 +34,7 @@ public class EmployeeManager {
    }
 
    public static Employee find(int employeeId) {
-      EmployeeDAO employeeDAO = DAOFactory.getInstance().getEmployeeDAO();
+      EmployeeDAO employeeDAO = DAOFactory.getEmployeeDAO();
       try {
          return employeeDAO.getEmployee(employeeId);
       }
@@ -40,7 +44,7 @@ public class EmployeeManager {
    }
 
    public static void update(Employee employee) {
-      EmployeeDAO employeeDAO = DAOFactory.getInstance().getEmployeeDAO();
+      EmployeeDAO employeeDAO = DAOFactory.getEmployeeDAO();
       try {
          employeeDAO.updateEmployee(employee);
       }
@@ -49,7 +53,7 @@ public class EmployeeManager {
    }
 
    public static List<Employee> search(EmployeeSearchCriteria criteria) {
-      EmployeeDAO employeeDAO = DAOFactory.getInstance().getEmployeeDAO();
+      EmployeeDAO employeeDAO = DAOFactory.getEmployeeDAO();
       try {
          return employeeDAO.searchEmployees(criteria);
       }
