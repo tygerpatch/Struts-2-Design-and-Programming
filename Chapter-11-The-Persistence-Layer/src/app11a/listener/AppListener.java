@@ -9,8 +9,8 @@ import javax.servlet.ServletContextListener;
 import javax.sql.DataSource;
 
 public class AppListener implements ServletContextListener {
-   public void contextInitialized(ServletContextEvent sce) {
-      ServletContext servletContext = sce.getServletContext();
+   public void contextInitialized(ServletContextEvent servletContextEvent) {
+      ServletContext servletContext = servletContextEvent.getServletContext();
       String dataSourceJndiName = servletContext.getInitParameter("dataSourceJndiName");
       try {
          Context context = new InitialContext();
