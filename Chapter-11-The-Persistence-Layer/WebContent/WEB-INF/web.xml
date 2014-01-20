@@ -15,6 +15,11 @@
         <param-value>mysql</param-value>
     </context-param>
 
+    <context-param>
+        <param-name>databaseName</param-name>
+        <param-value>my_jdbc</param-value>
+    </context-param>
+
     <listener>
         <listener-class>
             app11a.listener.AppListener
