@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC
+    "-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
+    "http://struts.apache.org/dtds/struts-2.0.dtd">
+
+<struts>
+	<constant name="struts.enable.DynamicMethodInvocation" value="false" />
+	<constant name="struts.devMode" value="true" />
+
+	<package name="app18a" extends="struts-default">
+		<interceptors>
+			<interceptor name="dataSourceInjector" class="interceptor.DataSourceInjectorInterceptor">
+				<param name="dataSourceName">java:comp/env/jdbc/MySQLDataSource</param>
+			</interceptor>
+		</interceptors>
+
+		<action name="Product_list" class="app18a.ListProductAction">
+			<interceptor-ref name="dataSourceInjector" />
+			<interceptor-ref name="defaultStack" />
+			<result>/jsp/Products.jsp</result>
+		</action>
+	</package>
+</struts>

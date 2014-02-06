@@ -9,11 +9,8 @@ import com.opensymphony.xwork2.ActionInvocation;
 import com.opensymphony.xwork2.interceptor.AbstractInterceptor;
 
 public class DataSourceInjectorInterceptor extends AbstractInterceptor {
+
     private static DataSource dataSource;
-    private String dataSourceName;
-    public void setDataSourceName(String dataSourceName) {
-        this.dataSourceName = dataSourceName;
-    }
 
     public void init() {
         // init() is called AFTER properties are set
@@ -22,17 +19,26 @@ public class DataSourceInjectorInterceptor extends AbstractInterceptor {
             try {
                 Context context = new InitialContext();
                 dataSource = (DataSource) context.lookup(dataSourceName);
-            } catch (NamingException e) {
+            } catch (NamingException namingException) {
+               System.out.println("There was a problem looking up the data source with the given name.");
+               namingException.printStackTrace();
             }
         }
     }
 
-    public String intercept(ActionInvocation invocation) throws Exception {
-        Object action = invocation.getAction();
-        if (action instanceof DataSourceAware) {
-            ((DataSourceAware) action).setDataSource(dataSource);
-        }
-        return invocation.invoke();
+    private String dataSourceName;
+
+    public void setDataSourceName(String dataSourceName) {
+        this.dataSourceName = dataSourceName;
     }
 
+   // *** AbstractInterceptor abstract class
+   @Override
+   public String intercept(ActionInvocation invocation) throws Exception {
+      Object action = invocation.getAction();
+      if (action instanceof DataSourceAware) {
+         ((DataSourceAware) action).setDataSource(dataSource);
+      }
+      return invocation.invoke();
+   }
 }
